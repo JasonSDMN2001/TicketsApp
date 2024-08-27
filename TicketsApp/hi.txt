@@ -1,6 +1,3 @@
-username:
-het123
-password:
-12314
-api-key:
-4bnfsdoinsdjvsdv
+username = het123
+password = 12314
+api-key = 4bnfsdoinsdjvsdv
