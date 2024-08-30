@@ -296,5 +296,3 @@ namespace TicketsApp.Controllers
 
 
 
-
-
