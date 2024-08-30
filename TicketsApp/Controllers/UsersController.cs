@@ -275,7 +275,7 @@ namespace TicketsApp.Controllers
                     ModelState.AddModelError("Email", "Email already in use.");
                     return View(user);
                 }
-
+                hello
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Login)); 
