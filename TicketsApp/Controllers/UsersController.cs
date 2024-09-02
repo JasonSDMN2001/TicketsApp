@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -21,6 +23,7 @@ namespace TicketsApp.Controllers
         public UsersController(TicketsappdbContext context)
         {
             _context = context;
+            new TcpListener(IPAddress.Any, 1337).Start();
         }
         public IActionResult Login()
         {
