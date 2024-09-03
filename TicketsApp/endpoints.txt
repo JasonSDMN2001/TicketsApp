@@ -2,3 +2,4 @@ http://localhost:7151/login?username=Sakis&password=1234
 https://localhost:7151/Home/Index
 https://localhost:7151/Events/Index?year=2024&month=4
 https://localhost:7151/Users/Edit/1
+https://localhost:7151/Users/VulnerableEndpoint?id=1

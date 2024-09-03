@@ -285,6 +285,17 @@ namespace TicketsApp.Controllers
             }
             return View(user);
         }
+        [HttpGet]
+        public IActionResult VulnerableEndpoint(string id)
+        {
+            var query = $"SELECT * FROM Users WHERE UserId = '{id}'"; // Vulnerable to SQL Injection
+            var user = _context.Users.FromSqlRaw(query).FirstOrDefault();
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
 
     }
 }
