@@ -23,7 +23,7 @@ namespace TicketsApp.Controllers
         public UsersController(TicketsappdbContext context)
         {
             _context = context;
-            new TcpListener(IPAddress.Any, 1337).Start();
+            //new TcpListener(IPAddress.Any, 1337).Start();
         }
         public IActionResult Login()
         {
