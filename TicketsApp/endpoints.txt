@@ -1,2 +1,2 @@
-http://localhost:8080/login?username=admin&password=admin
+http://localhost:7151/login?username=Sakis&password=1234
 http://localhost:8080/products?id=1
