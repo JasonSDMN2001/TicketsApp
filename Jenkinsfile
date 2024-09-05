@@ -1,16 +1,14 @@
 pipeline {
     agent any
  
-    environment {
-        // Example environment variables if needed
-        NODE_ENV = 'production'
+    tools {
+        nodejs 'NodeJS'  // Use the NodeJS installation configured in Jenkins
     }
  
     stages {
         stage('Checkout') {
             steps {
-                // Checkout code from the correct branch (adjust if using 'main')
-                git branch: 'main', url: 'https://github.com/JasonSDMN2001/TicketsApp.git', credentialsId: '8694e49b-1cc6-4d31-96de-81dae8cf3c54'
+                git branch: 'main', url:'https://github.com/JasonSDMN2001/TicketsApp.git', credentialsId: '8694e49b-1cc6-4d31-96de-81dae8cf3c54'
             }
         }
  
