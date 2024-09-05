@@ -1,31 +1,66 @@
 pipeline {
     agent any
  
+    environment {
+        // Add environment variables if needed
+    }
+ 
     stages {
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                // Clone the repository
-                git 'https://github.com/JasonSDMN2001/TicketsApp'
+                // Checkout code from the GitHub repository
+                git 'https://github.com/JasonSDMN2001/TicketsApp.git'
             }
         }
-        stage('Run Static Analysis') {
+ 
+        stage('Install Dependencies') {
             steps {
-                // Run the static analysis script from your git hooks PowerShell file
-                powershell './git-hooks.ps1'
+                // Install dependencies (assuming Node.js project with npm or yarn)
+                script {
+                    if (fileExists('package.json')) {
+                        sh 'npm install'  // or 'yarn install' if using yarn
+                    } else {
+                        error('No package.json file found!')
+                    }
+                }
             }
         }
-        stage('Run Dynamic Analysis') {
+ 
+        stage('Build') {
             steps {
-                // Execute dynamic analysis (SQLMap, nmap, etc.) from the PowerShell script
-                powershell './git-hooks.ps1'
+                // Build the project (assuming it's a Node.js project)
+                sh 'npm run build'
+            }
+        }
+ 
+        stage('Test') {
+            steps {
+                // Run tests if you have any
+                sh 'npm test'
+            }
+        }
+ 
+        stage('Deploy') {
+            steps {
+                // Optionally deploy your app (for example, to Heroku, AWS, or Docker)
+                // For example, deploy to Heroku:
+                // sh 'git push heroku main'
             }
         }
     }
  
     post {
         always {
-            // Clean up, archive results, or notify the team
-            archiveArtifacts artifacts: '**/results/*', allowEmptyArchive: true
+            // Archive the build artifacts
+            archiveArtifacts artifacts: '**/dist/**/*.*', allowEmptyArchive: true
+        }
+ 
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+ 
+        failure {
+            echo 'Pipeline failed.'
         }
     }
 }
