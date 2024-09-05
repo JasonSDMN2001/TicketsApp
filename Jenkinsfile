@@ -2,14 +2,15 @@ pipeline {
     agent any
  
     environment {
-        NODE_ENV = 'production'   // Example of setting an environment variable
+        // Example environment variables if needed
+        NODE_ENV = 'production'
     }
  
     stages {
         stage('Checkout') {
             steps {
-                // Fetch code from Git
-                git 'https://github.com/JasonSDMN2001/TicketsApp.git'
+                // Checkout code from the correct branch (adjust if using 'main')
+                git branch: 'main', url: 'https://github.com/JasonSDMN2001/TicketsApp.git', credentialsId: '8694e49b-1cc6-4d31-96de-81dae8cf3c54'
             }
         }
  
@@ -37,10 +38,10 @@ pipeline {
  
     post {
         success {
-            echo 'Build succeeded!'
+            echo 'Pipeline completed successfully!'
         }
         failure {
-            echo 'Build failed.'
+            echo 'Pipeline failed.'
         }
     }
 }
