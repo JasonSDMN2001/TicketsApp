@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Clone the repository
-                git 'https://github.com/your-repo.git'
+                git 'https://github.com/JasonSDMN2001/TicketsApp'
             }
         }
         stage('Run Static Analysis') {
