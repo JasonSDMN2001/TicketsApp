@@ -2,65 +2,45 @@ pipeline {
     agent any
  
     environment {
-        // Add environment variables if needed
+        NODE_ENV = 'production'   // Example of setting an environment variable
     }
  
     stages {
         stage('Checkout') {
             steps {
-                // Checkout code from the GitHub repository
+                // Fetch code from Git
                 git 'https://github.com/JasonSDMN2001/TicketsApp.git'
             }
         }
  
         stage('Install Dependencies') {
             steps {
-                // Install dependencies (assuming Node.js project with npm or yarn)
-                script {
-                    if (fileExists('package.json')) {
-                        sh 'npm install'  // or 'yarn install' if using yarn
-                    } else {
-                        error('No package.json file found!')
-                    }
-                }
+                // Install project dependencies
+                sh 'npm install'
             }
         }
  
         stage('Build') {
             steps {
-                // Build the project (assuming it's a Node.js project)
+                // Build the project
                 sh 'npm run build'
             }
         }
  
         stage('Test') {
             steps {
-                // Run tests if you have any
+                // Run tests
                 sh 'npm test'
-            }
-        }
- 
-        stage('Deploy') {
-            steps {
-                // Optionally deploy your app (for example, to Heroku, AWS, or Docker)
-                // For example, deploy to Heroku:
-                // sh 'git push heroku main'
             }
         }
     }
  
     post {
-        always {
-            // Archive the build artifacts
-            archiveArtifacts artifacts: '**/dist/**/*.*', allowEmptyArchive: true
-        }
- 
         success {
-            echo 'Pipeline completed successfully!'
+            echo 'Build succeeded!'
         }
- 
         failure {
-            echo 'Pipeline failed.'
+            echo 'Build failed.'
         }
     }
 }
